@@ -1,0 +1,10 @@
+
+CREATE TABLE records (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+INSERT INTO records (name) VALUES
+('Rekord 1'),
+('Rekord 2'),
+('Rekord 3');
