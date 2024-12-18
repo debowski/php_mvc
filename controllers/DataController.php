@@ -20,3 +20,14 @@ function delete_record_action($id) {
     header('Location: index.php');
     exit;
 }
+
+
+function add_record_action($title, $author, $year, $genre, $shelf) {
+    $db = db_connect();
+    add_record($db, $title, $author, $year, $genre, $shelf);
+    db_close($db);
+
+    // Po dodaniu przekierowanie z powrotem na listę
+    header('Location: index.php');
+    exit;
+}

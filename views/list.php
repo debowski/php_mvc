@@ -6,8 +6,21 @@
     <title>Lista danych</title>
 </head>
 <body>
-    
-    <h1>Lista rekordów</h1>
+    <h1>Domowa baza danych</h1>
+    <h2>Wprowadzanie ksiażek</h2>
+    <form method="POST" action="index.php">
+        <input type="hidden" name="action" value="add">
+        Tytuł: <input type="text" name="title" required><br>
+        Autor: <input type="text" name="author" required><br>
+        Rok wydania: <input type="number" name="year" required><br>
+        Gatunek: <input type="text" name="genre" required><br>
+        Polka: <input type="text" name="shelf" required><br>
+        <input type="submit" value="Dodaj">
+    </form>
+
+
+
+    <h2>Lista rekordów</h2>
     <ul>
         <?php foreach ($records as $record): ?>
             <li><?php echo htmlspecialchars($record['id']." ".$record['title']." ".$record['author']." ".$record['year']." ".$record['genre']." ".$record['shelf'] ); ?>       

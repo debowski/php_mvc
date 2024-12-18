@@ -11,6 +11,28 @@ function db_connect() {
     return $db;
 }
 
+// funkcja do dodawania książek
+function add_record($db, $title, $author, $year, $genre, $shelf) {
+    $title = mysqli_real_escape_string($db, $title);
+    $author = mysqli_real_escape_string($db, $author);
+    $year = intval($year); // Bezpieczna konwersja na liczbę całkowitą
+    $genre = mysqli_real_escape_string($db, $genre);
+    $shelf = mysqli_real_escape_string($db, $shelf);
+
+    $query = "INSERT INTO records (title, author, year, genre, shelf) VALUES ('$title', '$author', $year, '$genre', '$shelf')";
+
+    if (!mysqli_query($db, $query)) {
+        die('Błąd dodawania rekordu: ' . mysqli_error($db));
+    }
+
+    return mysqli_insert_id($db);
+}
+
+
+
+
+
+
 // Funkcja do pobierania wszystkich rekordów
 function get_all_records($db) {
     $query = "SELECT * FROM records";
