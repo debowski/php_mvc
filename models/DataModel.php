@@ -2,8 +2,8 @@
 
 // Funkcja do nawiązania połączenia z bazą danych
 function db_connect() {
-    $db = mysqli_connect('localhost', 'root', '', 'test_db');
-
+    $db = mysqli_connect('localhost', 'root', '', 'mvcdb');
+    mysqli_set_charset($db, 'utf8');
     if (!$db) {
         die('Błąd połączenia z bazą danych: ' . mysqli_connect_error());
     }
@@ -11,7 +11,7 @@ function db_connect() {
     return $db;
 }
 
-// Funkcja do pobierania danych z tabeli
+// Funkcja do pobierania wszystkich rekordów
 function get_all_records($db) {
     $query = "SELECT * FROM records";
     $result = mysqli_query($db, $query);
@@ -20,7 +20,6 @@ function get_all_records($db) {
         die('Błąd zapytania: ' . mysqli_error($db));
     }
 
-    // Pobranie danych jako tablica asocjacyjna
     $records = [];
     while ($row = mysqli_fetch_assoc($result)) {
         $records[] = $row;
@@ -29,6 +28,16 @@ function get_all_records($db) {
     mysqli_free_result($result);
 
     return $records;
+}
+
+// Funkcja do usuwania rekordu na podstawie ID
+function delete_record($db, $id) {
+    $id = intval($id); // Bezpieczna konwersja na liczbę całkowitą
+    $query = "DELETE FROM records WHERE id = $id";
+
+    if (!mysqli_query($db, $query)) {
+        die('Błąd usuwania rekordu: ' . mysqli_error($db));
+    }
 }
 
 // Funkcja do zamknięcia połączenia
